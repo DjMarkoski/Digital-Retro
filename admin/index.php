@@ -44,7 +44,7 @@
     else{
  ?>
   <div class="alert alert-danger" role="alert">
-    Error al inciar sesion <!--<img src="images/error.jpg" width="200"> -->
+  Error al inciar sesion <!--<img src="images/error.jpg" width="200"> -->
     </div>
  <?php
     }
