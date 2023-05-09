@@ -30,6 +30,7 @@ $con=mysqli_connect($host, $user, $pass, $db);
 $id=mysqli_real_escape_string($con, $_REQUEST['id']??'');
 $query="SELECT id, email, pass, nombre from usuarios where id='".$id."'; ";
 mysqli_query($con, $query);
+$res=mysqli_query($con, $query);
 $row=mysqli_fetch_assoc($res);
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -67,7 +68,6 @@ $row=mysqli_fetch_assoc($res);
                     <input type="text" name="nombre" class="form-control" value="<?php echo $row['nombre']?>" required="required">
                    </div>
                    <div class="form-group">
-                    <input type="hiddent" name="id" value="<?php echo $row['id']?>" >
                     <button type="submit" class="btn btn-primary" name="guardar">Guardar</button>
                    </div>
                 </form>

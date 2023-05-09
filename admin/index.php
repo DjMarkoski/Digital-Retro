@@ -31,7 +31,7 @@
     $password=md5($password);
     include_once "bdecommerce.php";
     $con=mysqli_connect($host, $user, $pass, $db);
-    $query="SELECT id,email,nombre from usuarios where email='".$email."' and pass='".$password."'; ";
+    $query="SELECT id, email, nombre from usuarios where email='".$email."' and pass='".$password."'; ";
     $res=mysqli_query($con, $query);
     $row=mysqli_fetch_assoc($res);
     if($row){

@@ -25,7 +25,7 @@
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Acciones
-                        <a href="panel.php?modulo=crearUsuario"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                        <a href="panel.php?modulo=crearUsuario.php"><i class="fa fa-plus" aria-hidden="true"></i></a>
                     </th>
                   </tr>
                   </thead>
@@ -42,8 +42,8 @@
                     <td><?php echo $row['nombre']?></td>
                     <td><?php echo $row['email']?></td>
                     <td>
-                        <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['id'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></a>
-                        <a href="usuarios.php?idBorrar=<?php echo $row['id'] ?>" class="text-danger"> <i class="fas fa-trash"> </a>
+                        <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['id'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
+                        <a href="usuarios.php?idBorrar=<?php echo $row['id'] ?>" class="text-danger"> <i class="fas fa-trash"></i> </a>
                     </td>
                   </tr>
                   <?php

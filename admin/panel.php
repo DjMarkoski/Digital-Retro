@@ -153,10 +153,10 @@ $modulo=$_REQUEST['modulo']??'';
       include_once "ventas.php";
       }
    if($modulo=="crearUsuario"){
-    include_once "crearUsuario.php";
+      include_once "crearUsuario.php";
    }
    if($modulo=="editarUsuario"){
-    include_once "editarUsuario.php";
+      include_once "editarUsuario.php";
    }
    ?>
 </div>
