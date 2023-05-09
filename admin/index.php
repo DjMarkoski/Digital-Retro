@@ -35,9 +35,9 @@
     $res=mysqli_query($con, $query);
     $row=mysqli_fetch_assoc($res);
     if($row){
-      $_SESSION['id']=$row['id'];
-      $_SESSION['email']=$row['email'];
-      $_SESSION['nombre']=$row['nombre'];
+      $_SESSION['id'] =$row['id'];
+      $_SESSION['email'] =$row['email'];
+      $_SESSION['nombre'] =$row['nombre'];
       header("location: panel.php");
 
     }
@@ -77,7 +77,7 @@
       </form>
       <!-- /.social-auth-links -->
       <p class="mb-1">
-        <a href="forgot-password.html">¿has olvidado contraseña?</a>
+        <a href="forgot-password.html">¿has olvidado la contraseña?</a>
       </p>
     <!-- /.login-card-body -->
   </div>
