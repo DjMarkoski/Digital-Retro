@@ -59,7 +59,7 @@ $modulo=$_REQUEST['modulo']??'';
     <ul class="navbar-nav ml-auto">
 
       <!-- Messages Dropdown Menu -->
-        <a class="nav-link" href="EditarPerfil.php">
+        <a class="nav-link" href="panel.php?modulo=editarUsuario&id=<?php echo $_SESSION['id']; ?>">
           <i class="far fa-user"></i>
         </a>
     </ul>

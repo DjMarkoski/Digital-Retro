@@ -3,9 +3,9 @@
         include_once "bdecommerce.php";
         $con=mysqli_connect($host, $user, $pass, $db);
         
-        $email= mysqli_escape_string($con, $_REQUEST['email']??'');
-        $pass=md5( mysqli_escape_string($con, $_REQUEST['pass']??'')); 
-        $nombre= mysqli_escape_string($con, $_REQUEST['nombre']??'');
+        $email= mysqli_real_escape_string($con, $_REQUEST['email']??'');
+        $pass=md5( mysqli_real_escape_string($con, $_REQUEST['pass']??'')); 
+        $nombre= mysqli_real_escape_string($con, $_REQUEST['nombre']??'');
         $query="INSERT INTO usuarios
         (email,           pass,      nombre) VALUES
         ('".$email."','".$pass."','".$nombre."')
@@ -48,15 +48,15 @@
                 <form action="panel.php?modulo=crearUsuario" method="post">
                    <div class="form-group">
                     <label >Email</label>
-                    <input type="email" name="email" class="form.control">
+                    <input type="email" name="email" class="form-control" required="required">
                    </div>
                    <div class="form-group">
                     <label >Pass</label>
-                    <input type="password" name="pass" class="form.control">
+                    <input type="password" name="pass" class="form-control" required="required">
                    </div>
                    <div class="form-group">
                     <label >Nombre</label>
-                    <input type="text" name="nombre" class="form.control">
+                    <input type="text" name="nombre" class="form-control" required="required">
                    </div>
                    <div class="form-group">
                     <button type="submit" class="btn btn-primary" name="guardar">Guardar</button>

@@ -43,7 +43,7 @@
                     <td><?php echo $row['email']?></td>
                     <td>
                         <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['id'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></a>
-                        <a href="usuarios.php?idBorrar=<?php echo $row['id'] ?>" class="text-danger"> <i class="fas fa-trash"></a>
+                        <a href="usuarios.php?idBorrar=<?php echo $row['id'] ?>" class="text-danger"> <i class="fas fa-trash"> </a>
                     </td>
                   </tr>
                   <?php

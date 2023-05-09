@@ -4,15 +4,15 @@ $con=mysqli_connect($host, $user, $pass, $db);
     if(isset($_REQUEST['guardar']) ){
         
         
-        $email= mysqli_escape_string($con, $_REQUEST['email']??'');
-        $pass=md5( mysqli_escape_string($con, $_REQUEST['pass']??'')); 
-        $nombre= mysqli_escape_string($con, $_REQUEST['nombre']??'');
-        $id= mysqli_escape_string($con, $_REQUEST['id']??'');
+        $email= mysqli_real_escape_string($con, $_REQUEST['email']??'');
+        $pass=md5( mysqli_real_escape_string($con, $_REQUEST['pass']??'')); 
+        $nombre= mysqli_real_escape_string($con, $_REQUEST['nombre']??'');
+        $id= mysqli_real_escape_string($con, $_REQUEST['id']??'');
 
 
-        $query="UPDATE usuarios SET
-            email='". $email ."', pass='" .$pass. "', nombre='" .$nombre. "'
-        where id='".$id."';
+        $query = "UPDATE usuarios SET
+            email='" . $email . "', pass='" . $pass . "', nombre='" . $nombre . "'
+            where id='" . $id . "';
         ";
         $res=mysqli_query($con, $query);
         if($res){
@@ -27,7 +27,7 @@ $con=mysqli_connect($host, $user, $pass, $db);
             
         }
     }
-$id= mysqli_real_escape_string($con, $_REQUEST['id']??'');
+$id=mysqli_real_escape_string($con, $_REQUEST['id']??'');
 $query="SELECT id, email, pass, nombre from usuarios where id='".$id."'; ";
 mysqli_query($con, $query);
 $row=mysqli_fetch_assoc($res);
@@ -39,7 +39,7 @@ $row=mysqli_fetch_assoc($res);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Crear Usuario</h1>
+            <h1>Editar Usuario</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -56,15 +56,15 @@ $row=mysqli_fetch_assoc($res);
                 <form action="panel.php?modulo=editarUsuario" method="post">
                    <div class="form-group">
                     <label >Email</label>
-                    <input type="email" name="email" class="form.control" value="<?php echo $row['email']?>">
+                    <input type="email" name="email" class="form-control" value="<?php echo $row['email']?>" required="required">
                    </div>
                    <div class="form-group">
                     <label >Pass</label>
-                    <input type="password" name="pass" class="form.control">
+                    <input type="password" name="pass" class="form-control" required="required">
                    </div>
                    <div class="form-group">
                     <label >Nombre</label>
-                    <input type="text" name="nombre" class="form.control" value="<?php echo $row['nombre']?>">
+                    <input type="text" name="nombre" class="form-control" value="<?php echo $row['nombre']?>" required="required">
                    </div>
                    <div class="form-group">
                     <input type="hiddent" name="id" value="<?php echo $row['id']?>" >
