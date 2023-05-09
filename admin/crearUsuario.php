@@ -51,7 +51,7 @@
                     <input type="email" name="email" class="form-control" required="required">
                    </div>
                    <div class="form-group">
-                    <label >Pass</label>
+                    <label >Password</label>
                     <input type="password" name="pass" class="form-control" required="required">
                    </div>
                    <div class="form-group">
