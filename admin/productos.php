@@ -1,25 +1,8 @@
 <?php
 include_once "bdecommerce.php";
 $con = mysqli_connect($host, $user, $pass, $db);
-if (isset($_REQUEST['idBorrar'])) {
-  $id = mysqli_real_escape_string($con, $_REQUEST['idBorrar'] ?? '');
-  $query = "DELETE from usuarios where id='" . $id . "';";
-  $res = mysqli_query($con, $query);
-  if ($res) {
 ?>
-    <div class="alert alert-warning float-right" role="alert">
-      Usuario borrado con exito
-    </div>
-  <?php
-  } else {
-  ?>
-    <div class="alert alert-danger float-right" role="alert">
-      Error al borrar usuario <?php echo mysqli_error($con); ?>
-    </div>
-<?php
-  }
-}
-?>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -27,7 +10,7 @@ if (isset($_REQUEST['idBorrar'])) {
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Usuarios</h1>
+          <h1>Productos</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -41,32 +24,40 @@ if (isset($_REQUEST['idBorrar'])) {
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="tablaProductos" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Acciones
-                      <a href="panel.php?modulo=crearUsuario"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                    </th>
+                    <th>id</th>
+                    <th>Nombre_videojuego</th>
+                    <th>Precio</th>
+                    <th>Key_videojuego</th>
+                    <th>Stock</th>
+                    <th>Descripcion</th>
+                    <th>Imagen</th>
+                    <th>Categoria</th>
+                    <th>Fecha_lanzamiento</th>
+                    <th>Clasificacion</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   // include_once "bdecommerce.php";
                   // $con=mysqli_connect($host, $user, $pass, $db);
-                  $query = "SELECT id,email,nombre from usuarios; ";
+                  $query = "SELECT id_productos,nombre_videojuego,precio,key_videojuego,stock,descripcion,imagen,categoria,fecha_lanzamiento,clasificacion from productos; ";
                   $res = mysqli_query($con, $query);
-
                   while ($row = mysqli_fetch_assoc($res)) {
                   ?>
                     <tr>
-                      <td><?php echo $row['nombre'] ?></td>
-                      <td><?php echo $row['email'] ?></td>
-                      <td>
-                        <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['id'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
-                        <a href="panel.php?modulo=usuarios&idBorrar=<?php echo $row['id'] ?>" class="text-danger borrar"> <i class="fas fa-trash"></i> </a>
-                      </td>
+                      <td><?php echo $row['id_productos'] ?></td>
+                      <td><?php echo $row['nombre_videojuego'] ?></td>
+                      <td><?php echo $row['precio'] ?></td>
+                      <td><?php echo $row['key_videojuego'] ?></td>
+                      <td><?php echo $row['stock'] ?></td>
+                      <td><?php echo $row['descripcion'] ?></td>
+                      <td><?php echo $row['imagen'] ?></td>
+                      <td><?php echo $row['categoria'] ?></td>
+                      <td><?php echo $row['fecha_lanzamiento'] ?></td>
+                      <td><?php echo $row['clasificacion'] ?></td>
                     </tr>
                   <?php
                   }
