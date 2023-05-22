@@ -16,7 +16,7 @@
 <body>
     <h1 class="text-center"> Agregar Productos</h1>
     <br>
-
+    
     <div class="container">
         <form action="insertar.php" method="POST">
             <div class="form-group mb-3">
