@@ -6,6 +6,7 @@ if (isset($_REQUEST['guardarP'])) {
     $id_productos = mysqli_real_escape_string($con, $_REQUEST['id_productos'] ?? '');
     $nombre_videojuego = mysqli_real_escape_string($con, $_REQUEST['nombreV'] ?? '');
     $precio = mysqli_real_escape_string($con, $_REQUEST['precio'] ?? '');
+    $plataforma = mysqli_real_escape_string($con, $_REQUEST['plataforma'] ?? '');
     $key_videojuego = mysqli_real_escape_string($con, $_REQUEST['keyV'] ?? '');
     $stock = mysqli_real_escape_string($con, $_REQUEST['stock'] ?? '');
     $descripcion = mysqli_real_escape_string($con, $_REQUEST['descrip'] ?? '');
@@ -14,13 +15,13 @@ if (isset($_REQUEST['guardarP'])) {
     $clasificacion = mysqli_real_escape_string($con, $_REQUEST['clasificacion'] ?? '');
 
     $query = "UPDATE productos SET
-            nombre_videojuego='  $nombre_videojuego  ', precio='  $precio  ', key_videojuego='  $key_videojuego  ', stock='  $stock  ', descripcion='  $descripcion  ', categoria='  $categoria  ',
+            nombre_videojuego='  $nombre_videojuego  ', precio='  $precio  ', plataforma= '$plataforma', key_videojuego='  $key_videojuego  ', stock='  $stock  ', descripcion='  $descripcion  ', categoria='  $categoria  ',
             fecha_lanzamiento='  $fecha_lanzamiento  ', clasificacion='  $clasificacion  '
             where id_productos='  $id_productos ' ;
         ";
     $res = mysqli_query($con, $query);
     if ($res) {
-        echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje=Producto ' . $nombre_videojuego . ' editado exitosamente" />';
+        echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje1=Producto ' . $nombre_videojuego . ' editado exitosamente" />';
     } else {
 ?>
         <div class="alert alert-danger" role="alert">
@@ -31,7 +32,7 @@ if (isset($_REQUEST['guardarP'])) {
     }
 }
 $id_productos = mysqli_real_escape_string($con, $_REQUEST['id_productos'] ?? '');
-$query = "SELECT id_productos, nombre_videojuego, precio, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion from productos where id_productos='" . $id_productos . "'; ";
+$query = "SELECT id_productos, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion from productos where id_productos='" . $id_productos . "'; ";
 mysqli_query($con, $query);
 $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
@@ -54,38 +55,54 @@ $row = mysqli_fetch_assoc($res);
     <h1 class="text-center"> Editar Productos</h1>
     <br>
     <div class="container">
-        <form  method="POST">
+        <form method="POST">
             <div class="form-group mb-3">
                 <label class="form-label">Nombre Videojuego</label>
-                <input type="text" class="form-control" name="nombreV" value="<?php echo $row['nombre_videojuego']?>" required="required">
+                <input type="text" class="form-control" name="nombreV" value="<?php echo $row['nombre_videojuego'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">Precio</label>
-                <input type="number" class="form-control" name="precio" value="<?php echo $row['precio']?>" required="required">
+                <input type="number" class="form-control" name="precio" value="<?php echo $row['precio'] ?>" required="required">
             </div>
+            <div>
+                <label class="form-group mb-3">Plataforma</label>
+                <div>
+                    <select name="plataforma" required="required">
+                        <option value="0">Seleccionar</option>
+                        <option value="PS5">PS5</option>
+                        <option value="PS4">PS4</option>
+                        <option value="Steam">Steam</option>
+                        <option value="XBOX S">XBOX S</option>
+                        <option value="XBOX X">XBOX X</option>
+                        <option value="Epic Games">Epic Games</option>
+                        <option value="EA Play">EA Play</option>
+                    </select>
+                </div>
+            </div>
+            <br><br>
             <div class="form-group mb-3">
                 <label class="form-label">Key Videojuego</label>
-                <input type="text" class="form-control" name="keyV" value="<?php echo $row['key_videojuego']?>" required="required">
+                <input type="text" class="form-control" name="keyV" value="<?php echo $row['key_videojuego'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">Stock</label>
-                <input type="number" class="form-control" name="stock" value="<?php echo $row['stock']?>" required="required">
+                <input type="number" class="form-control" name="stock" value="<?php echo $row['stock'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">descripcion</label>
-                <input type="text" class="form-control" name="descrip" value="<?php echo $row['descripcion']?>" required="required">
+                <input type="text" class="form-control" name="descrip" value="<?php echo $row['descripcion'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">categoria</label>
-                <input type="text" class="form-control" name="categ" value="<?php echo $row['categoria']?>" required="required">
+                <input type="text" class="form-control" name="categ" value="<?php echo $row['categoria'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">Fecha Lanzamiento</label>
-                <input type="date" class="form-control" name="fechaV" value="<?php echo $row['fecha_lanzamiento']?>" required="required">
+                <input type="date" class="form-control" name="fechaV" value="<?php echo $row['fecha_lanzamiento'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">Clasificacion</label>
-                <input type="text" class="form-control" name="clasificacion" value="<?php echo $row['clasificacion']?>" required="required">
+                <input type="text" class="form-control" name="clasificacion" value="<?php echo $row['clasificacion'] ?>" required="required">
             </div>
             <div class="text-center">
                 <button type="submit" name="guardarP" class="btn btn-primary">Guardar cambios</button>

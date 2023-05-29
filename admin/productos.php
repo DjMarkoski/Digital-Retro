@@ -6,10 +6,9 @@ if (isset($_REQUEST['idBorrarP'])) {
   $query = "DELETE from productos where id_productos='" . $id . "';";
   $res = mysqli_query($con, $query);
   if ($res) {
+    echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje2=Producto borrado exitosamente" />';
 ?>
-    <div class="alert alert-warning float-right" role="alert">
-      Productos borrado con exito
-    </div>
+
   <?php
   } else {
   ?>
@@ -47,6 +46,7 @@ if (isset($_REQUEST['idBorrarP'])) {
                     <th>id</th>
                     <th>Nombre_videojuego</th>
                     <th>Precio</th>
+                    <th>Plataforma</th>
                     <th>Key_videojuego</th>
                     <th>Stock</th>
                     <th>Descripcion</th>
@@ -60,7 +60,7 @@ if (isset($_REQUEST['idBorrarP'])) {
                   <?php
                   // include_once "bdecommerce.php";
                   // $con=mysqli_connect($host, $user, $pass, $db);
-                  $query = "SELECT id_productos, nombre_videojuego, precio,key_videojuego, stock, descripcion, imagen, categoria, fecha_lanzamiento, clasificacion from productos; ";
+                  $query = "SELECT id_productos, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion from productos; ";
                   $res = mysqli_query($con, $query);
                   while ($row = mysqli_fetch_assoc($res)) {
                   ?>
@@ -68,6 +68,7 @@ if (isset($_REQUEST['idBorrarP'])) {
                       <td><?php echo $row['id_productos'] ?></td>
                       <td><?php echo $row['nombre_videojuego'] ?></td>
                       <td><?php echo $row['precio'] ?></td>
+                      <td><?php echo $row['plataforma'] ?></td>
                       <td><?php echo $row['key_videojuego'] ?></td>
                       <td><?php echo $row['stock'] ?></td>
                       <td><?php echo $row['descripcion'] ?></td>

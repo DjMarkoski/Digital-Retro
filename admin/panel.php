@@ -192,6 +192,28 @@ $modulo = $_REQUEST['modulo'] ?? '';
       </div>
     <?php
     }
+    if (isset($_REQUEST['mensaje1'])) {
+      ?>
+        <div class="alert alert-warning alert-dismissible fade show float-right" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <?php echo $_REQUEST['mensaje1'] ?>
+        </div>
+      <?php
+      }
+      if (isset($_REQUEST['mensaje2'])) {
+        ?>
+          <div class="alert alert-danger alert-dismissible fade show float-right" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <?php echo $_REQUEST['mensaje2'] ?>
+          </div>
+        <?php
+        }
     if ($modulo == "estadisticas" || $modulo == "") {
       include_once "estadisticas.php";
     }
