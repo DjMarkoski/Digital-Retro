@@ -66,6 +66,10 @@
                 <label class="form-label">Clasificacion</label>
                 <input type="text" class="form-control" placeholder="PG13" name="clasificacion" required="required">
             </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Estado</label>
+                <input value="1" type="number" class="form-control" name="estado">
+            </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Agregar Producto</button>
                 <a href="panel.php?modulo=productos" class="btn btn-dark">Regresar</a>

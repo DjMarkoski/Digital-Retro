@@ -11,7 +11,8 @@
     $categoria=$_POST['categ'];
     $fecha_lanzamiento=$_POST['fechaV'];
     $clasificacion=$_POST['clasificacion'];
-    $sql ="INSERT INTO productos (nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion) VALUES ('$nombre_videojuego','$precio','$plataforma','$key_videojuego','$stock','$descripcion','$categoria','$fecha_lanzamiento','$clasificacion')";
+    $estado=$_POST['estado'];
+    $sql ="INSERT INTO productos (nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, estado) VALUES ('$nombre_videojuego','$precio','$plataforma','$key_videojuego','$stock','$descripcion','$categoria','$fecha_lanzamiento','$clasificacion','$estado')";
     $query = mysqli_query($con,$sql);
 
     if($query === TRUE) {
