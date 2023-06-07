@@ -181,21 +181,21 @@ button{
 	width: 100%;
 	border-radius: 10px 10px 0 0;
 }
-.detail-title{
+.detail-tittle{
 	padding: 5px;
 	text-align: center;
 	font-size: 18px;
 	color: #333;
 	width: calc(100% - 10px);
-	height: 35px;
+	height: 5px;
 }
 .detail-description{
 	text-align: center;
-	font-size: 14px;
+	font-size: 16px;
 	color: #333;
 	padding: 5px;
 	width: calc(100% - 10px);
-	height: 34px;
+	height: 5px;
 }
 .detail-price{
 	text-align: center;
@@ -203,6 +203,7 @@ button{
 	color: var(--main-red);
 	padding: 5px;
 	width: calc(100% - 10px);
+	
 }
 .detail-price span{
 	font-size: 15px;
@@ -258,4 +259,11 @@ input[type="radio"]{
 }
 .content-page h4{
 	margin: 5px 0;
+}
+.card{
+    margin-left: 12px;
+    margin-right: 20px; 
+}
+.row{
+    display: flex;
 }

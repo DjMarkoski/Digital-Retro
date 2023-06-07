@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Digital Retro Store</title>
-  <script type="text/javascript" src="js/jquery-3.7.0.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -29,41 +29,53 @@
   <div class="main-content">
     <div class="content-page">
       <div class="title-section">Productos descatados</div>
-      <div class="product-list">
-        <div class="product-box">
-          <a href="">
-            <div class="product">
-              <img src="images/god-of-war-ps5.jpg">
-              <div class="detail-tittle">God Of War</div>
-              <div class="detail-description">Juego de aventuras</div>
-              <div class="detail-price">$49.990</div>
-            </div>
-          </a>
+      <a href="">
+        <div class="row">
+          <?php
+          // Realizar la consulta
+          include_once("servicios/_conexion.php");
+          $sql = "SELECT imagen, nombre_videojuego, precio, descripcion FROM productos";
+          $result = mysqli_query($con, $sql);
+
+          // Verificar si se encontraron productos
+          if (mysqli_num_rows($result) > 0) {
+            // Recorrer los resultados y mostrar los productos 
+            while ($row = mysqli_fetch_assoc($result)) {
+
+              $imagen = $row['imagen'];
+              $nombre_videojuego = $row['nombre_videojuego'];
+              $precio = $row['precio'];
+              $descripcion = $row['descripcion'];
+              $forma_precio = number_format($precio, 0, ",",".");
+              // echo "<div>";
+              // echo "<img src='$imagen' alt='Imagen del producto'>";
+              // echo "<h3>$nombre</h3>";
+              // echo "<p>Precio: $precio</p>";
+              // echo "</div>";
+              // echo '<div class="card">';
+              // echo '<div class="product-list" "style="width: 18rem;"> ';
+              echo '<div class="product-box">';
+              echo '<a href="">';
+              echo '<div class="product">';
+              echo '<img src="data:image/jpg;base64,' . base64_encode($imagen) . '" class="card-img-top" alt="...">';
+              echo '<div class="card-body">
+                        <h5 class="detail-tittle">' . $nombre_videojuego . '</h5>
+                        <p class="detail-description">' . $descripcion . '</p>
+                        <p class="detail-price">CLP$' . $forma_precio . '</p>
+                    </div> 
+                    </a> 
+                    </div>               
+                    </div>';
+            }
+          } else {
+            echo "No se encontraron productos.";
+          }
+          ?>
         </div>
-        <div class="product-box">
-          <a href="">
-            <div class="product">
-              <img src="images/god-of-war-ps5.jpg">
-              <div class="detail-tittle">God Of War</div>
-              <div class="detail-description">Juego de aventuras</div>
-              <div class="detail-price">$49.990</div>
-            </div>
-          </a>
-        </div>
-        <div class="product-box">
-          <a href="">
-            <div class="product">
-              <img src="images/god-of-war-ps5.jpg">
-              <div class="detail-tittle">God Of War</div>
-              <div class="detail-description">Juego de aventuras</div>
-              <div class="detail-price">$49.990</div>
-            </div>
-          </a>
-        </div>
-      </div>
+      </a>
     </div>
-  </div>
   </div>
 </body>
 
 </html>
+

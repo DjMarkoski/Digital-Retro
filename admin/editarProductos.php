@@ -65,7 +65,7 @@ $row = mysqli_fetch_assoc($res);
     <h1 class="text-center"> Editar Productos</h1>
     <br>
     <div class="container">
-        <form method="POST">
+        <form method="POST" enctype='multipart/form-data'>
             <div class="form-group mb-3">
                 <label class="form-label">Nombre Videojuego</label>
                 <input type="text" class="form-control" name="nombreV" value="<?php echo $row['nombre_videojuego'] ?>" required="required">
