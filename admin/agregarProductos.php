@@ -17,7 +17,7 @@
     <br>
 
     <div class="container">
-        <form action="insertar.php" method="POST">
+        <form action="insertar.php" method="POST" enctype='multipart/form-data'>
             <div class="form-group mb-3">
                 <label class="form-label">Nombre Videojuego</label>
                 <input type="text" class="form-control" placeholder="God Of War" name="nombreV" required="required">
@@ -69,6 +69,10 @@
             <div class="form-group mb-3">
                 <label class="form-label">Estado</label>
                 <input value="1" type="number" class="form-control" name="estado">
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Imagen</label>
+                <input type="file" class="form-control"  name="imagen" id="imagen" required="required">
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Agregar Producto</button>

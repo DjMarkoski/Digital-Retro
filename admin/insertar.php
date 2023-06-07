@@ -12,7 +12,8 @@
     $fecha_lanzamiento=$_POST['fechaV'];
     $clasificacion=$_POST['clasificacion'];
     $estado=$_POST['estado'];
-    $sql ="INSERT INTO productos (nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, estado) VALUES ('$nombre_videojuego','$precio','$plataforma','$key_videojuego','$stock','$descripcion','$categoria','$fecha_lanzamiento','$clasificacion','$estado')";
+    $imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
+    $sql ="INSERT INTO productos (nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, estado, imagen) VALUES ('$nombre_videojuego','$precio','$plataforma','$key_videojuego','$stock','$descripcion','$categoria','$fecha_lanzamiento','$clasificacion','$estado','$imagen')";
     $query = mysqli_query($con,$sql);
 
     if($query === TRUE) {

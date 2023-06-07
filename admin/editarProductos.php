@@ -1,4 +1,5 @@
 <?php
+error_reporting(1);
 include_once "bdecommerce.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 if (isset($_REQUEST['guardarP'])) {
@@ -14,11 +15,20 @@ if (isset($_REQUEST['guardarP'])) {
     $fecha_lanzamiento = mysqli_real_escape_string($con, $_REQUEST['fechaV'] ?? '');
     $clasificacion = mysqli_real_escape_string($con, $_REQUEST['clasificacion'] ?? '');
 
-    $query = "UPDATE productos SET
+    if (!empty($_FILES['imagenE']['tmp_name'])) {
+        $imagen = addslashes(file_get_contents($_FILES['imagenE']['tmp_name']));
+        $query = "UPDATE productos SET
             nombre_videojuego='  $nombre_videojuego  ', precio='  $precio  ', plataforma= '$plataforma', key_videojuego='  $key_videojuego  ', stock='  $stock  ', descripcion='  $descripcion  ', categoria='  $categoria  ',
-            fecha_lanzamiento='  $fecha_lanzamiento  ', clasificacion='  $clasificacion  '
+            fecha_lanzamiento='  $fecha_lanzamiento  ', clasificacion='  $clasificacion  ', imagen=' $imagen '
             where id_productos='  $id_productos ' ;
         ";
+    } else {
+        $query = "UPDATE productos SET
+        nombre_videojuego='  $nombre_videojuego  ', precio='  $precio  ', plataforma= '$plataforma', key_videojuego='  $key_videojuego  ', stock='  $stock  ', descripcion='  $descripcion  ', categoria='  $categoria  ',
+        fecha_lanzamiento='  $fecha_lanzamiento  ', clasificacion='  $clasificacion  '
+        where id_productos='  $id_productos ' ;
+    ";
+    }
     $res = mysqli_query($con, $query);
     if ($res) {
         echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje1=Producto ' . $nombre_videojuego . ' editado exitosamente" />';
@@ -32,7 +42,7 @@ if (isset($_REQUEST['guardarP'])) {
     }
 }
 $id_productos = mysqli_real_escape_string($con, $_REQUEST['id_productos'] ?? '');
-$query = "SELECT id_productos, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion from productos where id_productos='" . $id_productos . "'; ";
+$query = "SELECT id_productos, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, imagen from productos where id_productos='" . $id_productos . "'; ";
 mysqli_query($con, $query);
 $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
@@ -68,7 +78,7 @@ $row = mysqli_fetch_assoc($res);
                 <label class="form-group mb-3">Plataforma</label>
                 <div>
                     <select name="plataforma" required="required">
-                        <option value="0">Seleccionar</option>
+                        <option value="No especifico">Seleccionar</option>
                         <option value="PS5">PS5</option>
                         <option value="PS4">PS4</option>
                         <option value="Steam">Steam</option>
@@ -104,11 +114,15 @@ $row = mysqli_fetch_assoc($res);
                 <label class="form-label">Clasificacion</label>
                 <input type="text" class="form-control" name="clasificacion" value="<?php echo $row['clasificacion'] ?>" required="required">
             </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Imagen</label>
+                <td><img height="125px" width="125px" src="data:image/jpg;base64,<?php echo base64_encode($row['imagen']) ?>"></td>
+                <input type="file" class="form-control" name="imagenE" id="imagenE">
+            </div>
             <div class="text-center">
                 <button type="submit" name="guardarP" class="btn btn-primary">Guardar cambios</button>
                 <a href="panel.php?modulo=productos" class="btn btn-dark">Regresar</a>
             </div>
-
         </form>
     </div>
 

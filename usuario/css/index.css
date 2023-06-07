@@ -1,5 +1,5 @@
 :root{
-	--main-header-color:linear-gradient(45deg,#ef971e,#ffbc6a);
+	--main-header-color:linear-gradient(45deg,#b41eef,#201cf1);
 	--main-red:#c71212;
 }
 body,html{
@@ -27,7 +27,7 @@ header{
 	margin-top: 7px;
 }
 .logo-place img{
-	width: 20%;
+	width: 100%;
 }
 .search-place{
 	width: calc(100% - 440px);

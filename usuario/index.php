@@ -13,7 +13,7 @@
 
 <body>
   <header>
-    <div class="logo-place"><img src="images/logo.jpg"></div>
+    <div class="logo-place"><img src="https://images.cooltext.com/5660233.png"></div>
     <!-- <div class="nombre">Digital Retro</div> -->
     <div class="search-place">
       <input type="text" id="idbusqueda" placeholder="Encuentra todo los que necesitas">

@@ -53,6 +53,7 @@ if (isset($_REQUEST['idBorrarP'])) {
                     <th>Categoria</th>
                     <th>Fecha_lanzamiento</th>
                     <th>Clasificacion</th>
+                    <th>Imagen</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -60,7 +61,7 @@ if (isset($_REQUEST['idBorrarP'])) {
                   <?php
                   // include_once "bdecommerce.php";
                   // $con=mysqli_connect($host, $user, $pass, $db);
-                  $query = "SELECT id_productos, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion from productos; ";
+                  $query = "SELECT id_productos, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, imagen from productos; ";
                   $res = mysqli_query($con, $query);
                   while ($row = mysqli_fetch_assoc($res)) {
                   ?>
@@ -75,6 +76,7 @@ if (isset($_REQUEST['idBorrarP'])) {
                       <td><?php echo $row['categoria'] ?></td>
                       <td><?php echo $row['fecha_lanzamiento'] ?></td>
                       <td><?php echo $row['clasificacion'] ?></td>
+                      <td><img height='125px' width='125px' src="data:image/jpg;base64,<?php echo base64_encode($row['imagen'])?>"></td>
                       <td scope="row">
                         <a href="panel.php?modulo=editarProductos&id_productos=<?php echo $row['id_productos'] ?>" style="margin-right: 5px;"> <i class="btn btn-warning">Editar producto</i></a>
                         <a href="panel.php?modulo=productos&idBorrarP=<?php echo $row['id_productos'] ?>" class="text-danger borrarP"> <i class="btn btn-danger">Borrar producto</i></a>
