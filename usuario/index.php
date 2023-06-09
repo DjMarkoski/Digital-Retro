@@ -1,81 +1,100 @@
-<!doctype html>
+<?php
+require 'servicios/config.php';
+require 'servicios/conexion.php';
+$db = new Database();
+$con = $db->conectar();
+
+$sql = $con->prepare("SELECT id_productos, nombre_videojuego, precio, imagen FROM productos WHERE estado=1");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+<?php
+
+if (isset($_POST['enviar'])) {
+  $busqueda = $_POST['campo'];
+  $consulta = $con->prepare("SELECT * FROM productos WHERE nombre_videojuego LIKE ?");
+  $termino = "%$busqueda%";
+  $consulta->execute(array($termino));
+  $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+} 
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Digital Retro Store</title>
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Retro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
   <header>
-    <div class="logo-place"><img src="https://images.cooltext.com/5660233.png"></div>
-    <!-- <div class="nombre">Digital Retro</div> -->
-    <div class="search-place">
-      <input type="text" id="idbusqueda" placeholder="Encuentra todo los que necesitas">
-      <button class="btn-main btn-search"><i class="fa fa-search" aria-hidden="true"></i></button>
-    </div>
-    <div class="option-place"></div>
-    <div class="item-option" title="Registrate"><a href="register.php"> <i class="fa fa-user-circle-o" aria-hidden="true"></i></a></div>
-    <div class="item-option" title="Iniciar Sesion"><a href="loginC.php"><i class="fa fa-sign-in" aria-hidden="true"></i></a></div>
-    <div class="item-option" title="Mis Compras"><a href="#"> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></div>
-
-
-  </header>
-  <div class="main-content">
-    <div class="content-page">
-      <div class="title-section">Productos descatados</div>
-      <a href="">
-        <div class="row">
-          <?php
-          // Realizar la consulta
-          include_once("servicios/_conexion.php");
-          $sql = "SELECT imagen, nombre_videojuego, precio, descripcion FROM productos";
-          $result = mysqli_query($con, $sql);
-
-          // Verificar si se encontraron productos
-          if (mysqli_num_rows($result) > 0) {
-            // Recorrer los resultados y mostrar los productos 
-            while ($row = mysqli_fetch_assoc($result)) {
-
-              $imagen = $row['imagen'];
-              $nombre_videojuego = $row['nombre_videojuego'];
-              $precio = $row['precio'];
-              $descripcion = $row['descripcion'];
-              $forma_precio = number_format($precio, 0, ",",".");
-              // echo "<div>";
-              // echo "<img src='$imagen' alt='Imagen del producto'>";
-              // echo "<h3>$nombre</h3>";
-              // echo "<p>Precio: $precio</p>";
-              // echo "</div>";
-              // echo '<div class="card">';
-              // echo '<div class="product-list" "style="width: 18rem;"> ';
-              echo '<div class="product-box">';
-              echo '<a href="">';
-              echo '<div class="product">';
-              echo '<img src="data:image/jpg;base64,' . base64_encode($imagen) . '" class="card-img-top" alt="...">';
-              echo '<div class="card-body">
-                        <h5 class="detail-tittle">' . $nombre_videojuego . '</h5>
-                        <p class="detail-description">' . $descripcion . '</p>
-                        <p class="detail-price">CLP$' . $forma_precio . '</p>
-                    </div> 
-                    </a> 
-                    </div>               
-                    </div>';
-            }
-          } else {
-            echo "No se encontraron productos.";
-          }
-          ?>
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a href="index.php" class="navbar-brand">
+          <strong>Digital Retro</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarHeader">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a href="index.php" class="nav-link active">Catalogo</a>
+            </li>
+            <div class="container-fluid col-lg-12">
+              <form class="d-flex" method="POST" role="search">
+                <input class="form-control col-lg-12 me-2" name="campo" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success" name="enviar" type="submit"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                  </svg></button>
+              </form>
+            </div>
+          </ul>
+          <a href="carrito.php" class="btn btn-primary">Carrito</a>
         </div>
-      </a>
+      </div>
     </div>
-  </div>
+  </header>
+  <main>
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <?php foreach ($resultado as $row) { ?>
+          <div class="col">
+            <div class="card shadow-sm">
+              <?php
+              $id = $row['id_productos'];
+              $imagen = $row['imagen'];
+
+              if (!file_exists($imagen)) {
+                $imagen = "images/no.photo.jpg";
+              }
+              ?>
+              <img src="data:image/jpg;base64,<?php echo base64_encode($row['imagen']) ?>">
+              <div class="card-body">
+                <h5 class="card-title"><?php echo $row['nombre_videojuego']  ?></h5>
+                <p class="card-text">CLP$<?php echo number_format($row['precio'], 0, ',', '.');  ?></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="detalles.php?id=<?php echo $row['id_productos']; ?>&token=<?php echo
+                                                                                        hash_hmac('sha1', $row['id_productos'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
+                  </div>
+                  <a href="" class="btn btn-success">Agregar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+    </div>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
 </html>
-
