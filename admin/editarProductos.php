@@ -17,12 +17,21 @@ if (isset($_REQUEST['guardarP'])) {
 
     if (!empty($_FILES['imagenE']['tmp_name'])) {
         $imagen = addslashes(file_get_contents($_FILES['imagenE']['tmp_name']));
+    
         $query = "UPDATE productos SET
-            nombre_videojuego='  $nombre_videojuego  ', precio='  $precio  ', plataforma= '$plataforma', key_videojuego='  $key_videojuego  ', stock='  $stock  ', descripcion='  $descripcion  ', categoria='  $categoria  ',
-            fecha_lanzamiento='  $fecha_lanzamiento  ', clasificacion='  $clasificacion  ', imagen=' $imagen '
-            where id_productos='  $id_productos ' ;
+            nombre_videojuego = '$nombre_videojuego',
+            precio = '$precio',
+            plataforma = '$plataforma',
+            key_videojuego = '$key_videojuego',
+            stock = '$stock',
+            descripcion = '$descripcion',
+            categoria = '$categoria',
+            fecha_lanzamiento = '$fecha_lanzamiento',
+            clasificacion = '$clasificacion',
+            imagen = '$imagen'
+            WHERE id_productos = '$id_productos';
         ";
-    } else {
+    }else {
         $query = "UPDATE productos SET
         nombre_videojuego='  $nombre_videojuego  ', precio='  $precio  ', plataforma= '$plataforma', key_videojuego='  $key_videojuego  ', stock='  $stock  ', descripcion='  $descripcion  ', categoria='  $categoria  ',
         fecha_lanzamiento='  $fecha_lanzamiento  ', clasificacion='  $clasificacion  '
