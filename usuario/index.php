@@ -18,6 +18,9 @@ if (isset($_POST['enviar'])) {
   $consulta->execute(array($termino));
   $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// session_destroy();
+// print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +60,10 @@ if (isset($_POST['enviar'])) {
             </div>
           </ul>
           <div>
-            <a href="carrito.php" class="btn btn-primary" name="carrito">Carrito</a>
+            <a href="carrito.php" class="btn btn-primary">Carrito <span id="num_cart" class="badge bg-secondary">
+                <?php echo $num_cart; ?>
+              </span>
+            </a>
             <a href="LoginC.php" class="btn btn-primary" name="login"> <i class="bi bi-person"></i> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
               </svg>Login</a>
@@ -91,9 +97,10 @@ if (isset($_POST['enviar'])) {
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <a href="detalles.php?id=<?php echo $row['id']; ?>&token=<?php echo
-                                                                                        hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
+                    hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
                   </div>
-                  <a href="" class="btn btn-success">Agregar</a>
+                  <button class="btn btn-outline-success" type="button" onclick="addProducto(<?php echo $row['id']; ?>, 
+                  '<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>')">Agregar</button>
                 </div>
               </div>
             </div>
@@ -104,6 +111,27 @@ if (isset($_POST['enviar'])) {
     </div>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  <script>
+      function addProducto(id, token){
+        var url = 'clases/carrito.php'
+        var formData = new FormData();
+        formData.append('id', id)
+        formData.append('token', token)
+
+        fetch(url,{
+          method:'POST',
+          body: formData,
+          mode: 'cors'
+        }).then(response => response.json())
+        .then(data =>{
+          if(data.ok){
+            let elemento =document.getElementById("num_cart")
+            elemento.innerHTML = data.numero
+          }
+        })
+      }
+    </script>
 </body>
 
 </html>
