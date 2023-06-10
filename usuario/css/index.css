@@ -2,3 +2,6 @@ main>
 .container{  
 	padding: 30px 0; 
 }
+.btn-primary{
+	margin-bottom: auto;
+}

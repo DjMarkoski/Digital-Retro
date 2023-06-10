@@ -3,7 +3,7 @@ include_once "bdecommerce.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 if (isset($_REQUEST['idBorrarP'])) {
   $id = mysqli_real_escape_string($con, $_REQUEST['idBorrarP'] ?? '');
-  $query = "DELETE from productos where id_productos='" . $id . "';";
+  $query = "DELETE from productos where id='" . $id . "';";
   $res = mysqli_query($con, $query);
   if ($res) {
     echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje2=Producto borrado exitosamente" />';
@@ -61,12 +61,12 @@ if (isset($_REQUEST['idBorrarP'])) {
                   <?php
                   // include_once "bdecommerce.php";
                   // $con=mysqli_connect($host, $user, $pass, $db);
-                  $query = "SELECT id_productos, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, imagen from productos; ";
+                  $query = "SELECT id, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, imagen from productos; ";
                   $res = mysqli_query($con, $query);
                   while ($row = mysqli_fetch_assoc($res)) {
                   ?>
                     <tr>
-                      <td><?php echo $row['id_productos'] ?></td>
+                      <td><?php echo $row['id'] ?></td>
                       <td><?php echo $row['nombre_videojuego'] ?></td>
                       <td><?php echo $row['precio'] ?></td>
                       <td><?php echo $row['plataforma'] ?></td>
@@ -78,8 +78,8 @@ if (isset($_REQUEST['idBorrarP'])) {
                       <td><?php echo $row['clasificacion'] ?></td>
                       <td><img height='125px' width='125px' src="data:image/jpg;base64,<?php echo base64_encode($row['imagen'])?>"></td>
                       <td scope="row">
-                        <a href="panel.php?modulo=editarProductos&id_productos=<?php echo $row['id_productos'] ?>" style="margin-right: 5px;"> <i class="btn btn-warning">Editar producto</i></a>
-                        <a href="panel.php?modulo=productos&idBorrarP=<?php echo $row['id_productos'] ?>" class="text-danger borrarP"> <i class="btn btn-danger">Borrar producto</i></a>
+                        <a href="panel.php?modulo=editarProductos&id=<?php echo $row['id'] ?>" style="margin-right: 5px;"> <i class="btn btn-warning">Editar producto</i></a>
+                        <a href="panel.php?modulo=productos&idBorrarP=<?php echo $row['id'] ?>" class="text-danger borrarP"> <i class="btn btn-danger">Borrar producto</i></a>
                       </td>
                     </tr>
                   <?php

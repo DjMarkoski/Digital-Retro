@@ -4,7 +4,7 @@ require 'servicios/conexion.php';
 $db = new Database();
 $con = $db->conectar();
 
-$sql = $con->prepare("SELECT id_productos, nombre_videojuego, precio, imagen FROM productos WHERE estado=1");
+$sql = $con->prepare("SELECT id, nombre_videojuego, precio, imagen FROM productos WHERE estado=1");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -17,7 +17,7 @@ if (isset($_POST['enviar'])) {
   $termino = "%$busqueda%";
   $consulta->execute(array($termino));
   $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
-} 
+}
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +56,16 @@ if (isset($_POST['enviar'])) {
               </form>
             </div>
           </ul>
-          <a href="carrito.php" class="btn btn-primary">Carrito</a>
+          <div>
+            <a href="carrito.php" class="btn btn-primary" name="carrito">Carrito</a>
+            <a href="LoginC.php" class="btn btn-primary" name="login"> <i class="bi bi-person"></i> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
+              </svg>Login</a>
+            <a href="register.php" class="btn btn-primary" name="registrarse"> <i class="bi bi-person-add"></i> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
+                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
+              </svg>Registrate</a>
+          </div>
         </div>
       </div>
     </div>
@@ -68,7 +77,7 @@ if (isset($_POST['enviar'])) {
           <div class="col">
             <div class="card shadow-sm">
               <?php
-              $id = $row['id_productos'];
+              $id = $row['id'];
               $imagen = $row['imagen'];
 
               if (!file_exists($imagen)) {
@@ -81,8 +90,8 @@ if (isset($_POST['enviar'])) {
                 <p class="card-text">CLP$<?php echo number_format($row['precio'], 0, ',', '.');  ?></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a href="detalles.php?id=<?php echo $row['id_productos']; ?>&token=<?php echo
-                                                                                        hash_hmac('sha1', $row['id_productos'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
+                    <a href="detalles.php?id=<?php echo $row['id']; ?>&token=<?php echo
+                                                                                        hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
                   </div>
                   <a href="" class="btn btn-success">Agregar</a>
                 </div>

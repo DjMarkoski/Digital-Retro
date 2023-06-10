@@ -4,7 +4,7 @@ include_once "bdecommerce.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 if (isset($_REQUEST['guardarP'])) {
 
-    $id_productos = mysqli_real_escape_string($con, $_REQUEST['id_productos'] ?? '');
+    $id = mysqli_real_escape_string($con, $_REQUEST['id'] ?? '');
     $nombre_videojuego = mysqli_real_escape_string($con, $_REQUEST['nombreV'] ?? '');
     $precio = mysqli_real_escape_string($con, $_REQUEST['precio'] ?? '');
     $plataforma = mysqli_real_escape_string($con, $_REQUEST['plataforma'] ?? '');
@@ -29,13 +29,13 @@ if (isset($_REQUEST['guardarP'])) {
             fecha_lanzamiento = '$fecha_lanzamiento',
             clasificacion = '$clasificacion',
             imagen = '$imagen'
-            WHERE id_productos = '$id_productos';
+            WHERE id = '$id';
         ";
     }else {
         $query = "UPDATE productos SET
         nombre_videojuego='  $nombre_videojuego  ', precio='  $precio  ', plataforma= '$plataforma', key_videojuego='  $key_videojuego  ', stock='  $stock  ', descripcion='  $descripcion  ', categoria='  $categoria  ',
         fecha_lanzamiento='  $fecha_lanzamiento  ', clasificacion='  $clasificacion  '
-        where id_productos='  $id_productos ' ;
+        where id='  $id ' ;
     ";
     }
     $res = mysqli_query($con, $query);
@@ -50,8 +50,8 @@ if (isset($_REQUEST['guardarP'])) {
 
     }
 }
-$id_productos = mysqli_real_escape_string($con, $_REQUEST['id_productos'] ?? '');
-$query = "SELECT id_productos, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, imagen from productos where id_productos='" . $id_productos . "'; ";
+$id = mysqli_real_escape_string($con, $_REQUEST['id'] ?? '');
+$query = "SELECT id, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, imagen from productos where id='" . $id . "'; ";
 mysqli_query($con, $query);
 $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
