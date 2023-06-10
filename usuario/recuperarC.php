@@ -2,11 +2,12 @@
 if (isset($_REQUEST['recuperar'])) {
     $email = $_REQUEST['email'] ?? '';
 ?>
-    <div class="alert alert-primary" role="alert">
-        se realizo el envio a su correo
-    </div>
+    <?php
+    echo '<div class="alert alert-primary" role="alert">
+        se realizo el envio de recuperacion de contraseña a ' . $email . '
+    </div>';
 
-
+    ?>
 <?php
 }
 

@@ -52,7 +52,7 @@
                         <label for="">Password</label>
                     </div>
                     <div class="forget">
-                        <label for=""><input type="checkbox" value="">Recordarme <a href="#">¿Olvido su contraseña? </a></label>
+                        <label for=""><input type="checkbox" value="">Recordarme <a href="recuperarC.php">¿Olvido su contraseña? </a></label>
                     </div>
                     <button type="submit" name="loginC">Iniciar Sesión</button>
                     <div class="register">
