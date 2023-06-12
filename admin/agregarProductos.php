@@ -34,10 +34,9 @@
                         <option value="1">PS5</option>
                         <option value="2">PS4</option>
                         <option value="3">Steam</option>
-                        <option value="4">XBOX S</option>
-                        <option value="5">XBOX X</option>
-                        <option value="6">Epic Games</option>
-                        <option value="7">EA Play</option>
+                        <option value="4">XBOX X/S</option>
+                        <option value="5">Epic Games</option>
+                        <option value="6">EA Play</option>
                     </select>
                 </div>
             </div>

@@ -87,14 +87,14 @@ $row = mysqli_fetch_assoc($res);
             </div>
             <div>
                 <label class="form-group mb-3">Plataforma</label>
+                <!-- <input type="text" class="combobox" name="plataforma" value="" required="required"> -->
                 <div>
                     <select name="plataforma" required="required">
                         <option value="No especifico">Seleccionar</option>
                         <option value="PS5">PS5</option>
                         <option value="PS4">PS4</option>
                         <option value="Steam">Steam</option>
-                        <option value="XBOX S">XBOX S</option>
-                        <option value="XBOX X">XBOX X</option>
+                        <option value="XBOX X/S">XBOX X/S</option>
                         <option value="Epic Games">Epic Games</option>
                         <option value="EA Play">EA Play</option>
                     </select>

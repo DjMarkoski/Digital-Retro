@@ -18,7 +18,7 @@ if ($id == '' || $token == '') {
         $sql = $con->prepare("SELECT count(id) FROM productos WHERE id=? AND estado=1");
         $sql->execute([$id]);
         if ($sql->fetchColumn() > 0) {
-            $sql = $con->prepare("SELECT nombre_videojuego, descripcion, precio, plataforma, clasificacion, imagen FROM productos WHERE id=? AND estado=1 
+            $sql = $con->prepare("SELECT nombre_videojuego, descripcion, precio, plataforma, clasificacion, fecha_lanzamiento, imagen FROM productos WHERE id=? AND estado=1 
       LIMIT 1");
             $sql->execute([$id]);
             $row = $sql->fetch(PDO::FETCH_ASSOC);
@@ -27,6 +27,7 @@ if ($id == '' || $token == '') {
             $precio = $row['precio'];
             $plataforma = $row['plataforma'];
             $clasificacion = $row['clasificacion'];
+            $fecha_lanzamiento = $row['fecha_lanzamiento'];
             $imagen = $row['imagen'];
         }
     } else {
@@ -100,13 +101,16 @@ if ($id == '' || $token == '') {
                     <h2><?php echo $nombre; ?></h2>
                     <h2><?php echo MONEDA . number_format($precio, 0, ',', '.');; ?></h2>
                     <p class="lead">
-                        <?php echo $descripcion; ?>
+                        DESCRIPCION: <?php echo $descripcion; ?>
                     </p>
                     <p class="detail-pla">
-                        <?php echo $plataforma; ?>
+                       PLATAFORMA: <?php echo $plataforma; ?>
                     </p>
                     <p class="detail-cla">
-                        <?php echo $clasificacion; ?>
+                        CLASIFICACION: <?php echo $clasificacion; ?>
+                    </p>
+                    <p class="detail-cla">
+                        FECHA LANZAMIENTO: <?php echo $fecha_lanzamiento; ?>
                     </p>
                     <div class="d-grid gap-3 col-10 mx-auto">
                         <button class="btn btn-primary" type="button">Comprar Ahora</button>
