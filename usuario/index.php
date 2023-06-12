@@ -8,7 +8,10 @@ $sql = $con->prepare("SELECT id, nombre_videojuego, precio, imagen FROM producto
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
+// session_destroy();
+// print_r($_SESSION);
 ?>
+
 <?php
 
 if (isset($_POST['enviar'])) {
@@ -18,9 +21,6 @@ if (isset($_POST['enviar'])) {
   $consulta->execute(array($termino));
   $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
 }
-
-// session_destroy();
-// print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ if (isset($_POST['enviar'])) {
               <a href="index.php" class="nav-link active">Catalogo</a>
             </li>
             <div class="container-fluid col-lg-12">
-              <form class="d-flex" method="POST" role="search">
+              <form class="d-flex" role="search" method="POST">
                 <input class="form-control col-lg-12 me-2" name="campo" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-success" name="enviar" type="submit"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -72,6 +72,8 @@ if (isset($_POST['enviar'])) {
                 <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
               </svg>Registrate</a>
           </div>
+          </span>
+          </a>
         </div>
       </div>
     </div>
@@ -92,12 +94,16 @@ if (isset($_POST['enviar'])) {
               ?>
               <img src="data:image/jpg;base64,<?php echo base64_encode($row['imagen']) ?>">
               <div class="card-body">
-                <h5 class="card-title"><?php echo $row['nombre_videojuego']  ?></h5>
-                <p class="card-text">CLP$<?php echo number_format($row['precio'], 0, ',', '.');  ?></p>
+                <h5 class="card-title">
+                  <?php echo $row['nombre_videojuego'] ?>
+                </h5>
+                <p class="card-text">CLP$
+                  <?php echo number_format($row['precio'], 0, ',', '.'); ?>
+                </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <a href="detalles.php?id=<?php echo $row['id']; ?>&token=<?php echo
-                    hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
+                                                                              hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
                   </div>
                   <button class="btn btn-outline-success" type="button" onclick="addProducto(<?php echo $row['id']; ?>, 
                   '<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>')">Agregar</button>
@@ -113,25 +119,25 @@ if (isset($_POST['enviar'])) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
   <script>
-      function addProducto(id, token){
-        var url = 'clases/carrito.php'
-        var formData = new FormData();
-        formData.append('id', id)
-        formData.append('token', token)
+    function addProducto(id, token) {
+      var url = 'clases/carrito.php'
+      var formData = new FormData();
+      formData.append('id', id)
+      formData.append('token', token)
 
-        fetch(url,{
-          method:'POST',
+      fetch(url, {
+          method: 'POST',
           body: formData,
           mode: 'cors'
         }).then(response => response.json())
-        .then(data =>{
-          if(data.ok){
-            let elemento =document.getElementById("num_cart")
+        .then(data => {
+          if (data.ok) {
+            let elemento = document.getElementById("num_cart")
             elemento.innerHTML = data.numero
           }
         })
-      }
-    </script>
+    }
+  </script>
 </body>
 
 </html>

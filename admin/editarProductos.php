@@ -14,10 +14,11 @@ if (isset($_REQUEST['guardarP'])) {
     $categoria = mysqli_real_escape_string($con, $_REQUEST['categ'] ?? '');
     $fecha_lanzamiento = mysqli_real_escape_string($con, $_REQUEST['fechaV'] ?? '');
     $clasificacion = mysqli_real_escape_string($con, $_REQUEST['clasificacion'] ?? '');
+    $estado = mysqli_real_escape_string($con, $_REQUEST['estado'] ?? '');
 
     if (!empty($_FILES['imagenE']['tmp_name'])) {
         $imagen = addslashes(file_get_contents($_FILES['imagenE']['tmp_name']));
-    
+
         $query = "UPDATE productos SET
             nombre_videojuego = '$nombre_videojuego',
             precio = '$precio',
@@ -28,13 +29,14 @@ if (isset($_REQUEST['guardarP'])) {
             categoria = '$categoria',
             fecha_lanzamiento = '$fecha_lanzamiento',
             clasificacion = '$clasificacion',
+            estado = '$estado',
             imagen = '$imagen'
             WHERE id = '$id';
         ";
-    }else {
+    } else {
         $query = "UPDATE productos SET
         nombre_videojuego='  $nombre_videojuego  ', precio='  $precio  ', plataforma= '$plataforma', key_videojuego='  $key_videojuego  ', stock='  $stock  ', descripcion='  $descripcion  ', categoria='  $categoria  ',
-        fecha_lanzamiento='  $fecha_lanzamiento  ', clasificacion='  $clasificacion  '
+        fecha_lanzamiento='  $fecha_lanzamiento  ', clasificacion='  $clasificacion  ', estado='  $estado  '
         where id='  $id ' ;
     ";
     }
@@ -51,7 +53,7 @@ if (isset($_REQUEST['guardarP'])) {
     }
 }
 $id = mysqli_real_escape_string($con, $_REQUEST['id'] ?? '');
-$query = "SELECT id, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, imagen from productos where id='" . $id . "'; ";
+$query = "SELECT id, nombre_videojuego, precio, plataforma, key_videojuego, stock, descripcion, categoria, fecha_lanzamiento, clasificacion, estado, imagen from productos where id='" . $id . "'; ";
 mysqli_query($con, $query);
 $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
@@ -108,11 +110,11 @@ $row = mysqli_fetch_assoc($res);
                 <input type="number" class="form-control" name="stock" value="<?php echo $row['stock'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
-                <label class="form-label">descripcion</label>
+                <label class="form-label">Descripcion</label>
                 <input type="text" class="form-control" name="descrip" value="<?php echo $row['descripcion'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
-                <label class="form-label">categoria</label>
+                <label class="form-label">Categoria</label>
                 <input type="text" class="form-control" name="categ" value="<?php echo $row['categoria'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
@@ -122,6 +124,10 @@ $row = mysqli_fetch_assoc($res);
             <div class="form-group mb-3">
                 <label class="form-label">Clasificacion</label>
                 <input type="text" class="form-control" name="clasificacion" value="<?php echo $row['clasificacion'] ?>" required="required">
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Estado</label>
+                <input type="number" class="form-control" name="estado" value="<?php echo $row['estado'] ?>" required="required">
             </div>
             <div class="form-group mb-3">
                 <label class="form-label">Imagen</label>
