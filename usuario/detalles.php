@@ -46,8 +46,9 @@ if ($id == '' || $token == '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Retro</title>
+    <script src="https://kit.fontawesome.com/827cf0b5dd.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/detalle.css">
 </head>
 
 <body>
@@ -86,9 +87,9 @@ if ($id == '' || $token == '') {
                                 <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
                                 <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
                             </svg>Registrate</a>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </header>
     <main>
@@ -104,7 +105,7 @@ if ($id == '' || $token == '') {
                         DESCRIPCION: <?php echo $descripcion; ?>
                     </p>
                     <p class="detail-pla">
-                       PLATAFORMA: <?php echo $plataforma; ?>
+                        PLATAFORMA: <?php echo $plataforma; ?>
                     </p>
                     <p class="detail-cla">
                         CLASIFICACION: <?php echo $clasificacion; ?>
@@ -143,5 +144,41 @@ if ($id == '' || $token == '') {
         }
     </script>
 </body>
+<div class="conce">
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: black;">
+            © 2023 Copyright:
+            <a class="text-white" href="#">Digital Retro</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+</div>
 
 </html>

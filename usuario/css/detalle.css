@@ -1,0 +1,21 @@
+img{
+    width: 80%;
+    margin-top: 8%;
+    margin-block-end: 20%;
+}
+.name{
+    margin-top: 8%;
+}
+.lead{
+    padding: 20px;
+    margin-bottom: 40px;
+    position: relative;
+
+}
+footer{
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    bottom: 0;
+    
+}
