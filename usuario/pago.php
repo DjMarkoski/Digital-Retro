@@ -117,7 +117,7 @@ if ($productos != null) {
                                     <tr>
                                         <td colspan="2">
                                             <p class="h3 text-end" id="total">
-                                                <?php echo MONEDA . number_format($total, 2, '.', ','); ?>
+                                                <?php echo MONEDA . number_format($total, 0, ',', '.'); ?>
                                             </p>
                                         </td>
                                     </tr>

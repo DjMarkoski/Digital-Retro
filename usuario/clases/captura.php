@@ -8,9 +8,9 @@ $con = $db->conectar();
 $json = file_get_contents('php://input');
 $datos = json_decode($json, true);
 
-echo '<pre>';
-print_r($datos);
-echo '</pre>';
+// echo '<pre>';
+// print_r($datos);
+// echo '</pre>';
 
 if(is_array($datos)){
     $id_transaccion = $datos['detalles']['id'];
@@ -25,6 +25,26 @@ if(is_array($datos)){
         ?,?,?,?,?,?)");
     $sql->execute([$id_transaccion, $fecha_nueva, $status, $email, $id_cliente, $total]);
     $id = $con->lastInsertId();
+
+    if( $id > 0){
+        $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
+        if ($productos != null) {
+            foreach ($productos as $clave => $cantidad) {
+                $sql = $con->prepare("SELECT id, nombre_videojuego, precio FROM productos WHERE id=? AND estado=1");
+                $sql->execute([$clave]);
+                $row_prod = $sql->fetch(PDO::FETCH_ASSOC);
+
+                $nombre = $row_prod['nombre_videojuego'];
+                $precio = $row_prod['precio'];
+
+                $sql_insert=  $con->prepare("INSERT INTO detalle_compra(id_compra, id_producto, nombre, 
+                precio, cantidad) VALUES (?,?,?,?,?)");
+
+                $sql_insert->execute([$id, $clave, $nombre ,$precio, $cantidad]);
+            }
+        }
+        unset($_SESSION['carrito']);
+    }
 }
 
 
