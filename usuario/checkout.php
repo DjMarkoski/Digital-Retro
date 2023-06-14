@@ -154,7 +154,7 @@ if ($productos != null) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ¿Desea elminar el producto de la lista?
+                    Â¿Desea elminar el producto de la lista?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

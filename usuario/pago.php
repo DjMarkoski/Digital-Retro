@@ -62,7 +62,7 @@ if ($productos != null) {
                             </form>
                         </div>
                     </ul>
-                    <a href="checkout.php" class="btn btn-primary">Carrito <span id="num_cart" class="badge bg-secondary">
+                    <a href="carrito.php" class="btn btn-primary">Carrito <span id="num_cart" class="badge bg-secondary">
                             <?php echo $num_cart; ?>
                         </span>
                     </a>
@@ -101,7 +101,7 @@ if ($productos != null) {
                                         $cantidad = $producto['cantidad'];
                                         $subtotal = $cantidad * $precio;
                                         $total += $subtotal;
-                                        $dolares = 788.30;
+                                        $dolares = 800;
                                         $dolaresU = round($total / $dolares, 0);
                                 ?>
                                         <tr>
@@ -117,7 +117,7 @@ if ($productos != null) {
                                     <tr>
                                         <td colspan="2">
                                             <p class="h3 text-end" id="total">
-                                                <?php echo MONEDA . number_format($total, 0, ',', '.'); ?>
+                                                <?php echo MONEDA . number_format($total, 2, '.', ','); ?>
                                             </p>
                                         </td>
                                     </tr>
@@ -164,6 +164,8 @@ if ($productos != null) {
                         body: JSON.stringify({
                             detalles: detalles
                         })
+                    }).then(function(response) {
+                        window.location.href = "completado.php?key=" + detalles['id']; //$datos['detalles']['id']
                     });
                 });
             },

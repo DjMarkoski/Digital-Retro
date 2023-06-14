@@ -42,6 +42,7 @@ if(is_array($datos)){
 
                 $sql_insert->execute([$id, $clave, $nombre ,$precio, $cantidad]);
             }
+            include 'enviar_email.php';
         }
         unset($_SESSION['carrito']);
     }
