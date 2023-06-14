@@ -32,9 +32,10 @@ if ($productos != null) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Retro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/827cf0b5dd.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/pago.css">
 </head>
 
 <body>
@@ -44,8 +45,7 @@ if ($productos != null) {
                 <a href="index.php" class="navbar-brand">
                     <strong>Digital Retro</strong>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
-                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarHeader">
@@ -55,19 +55,14 @@ if ($productos != null) {
                         </li>
                         <div class="container-fluid col-lg-12">
                             <form class="d-flex" role="search" method="POST">
-                                <input class="form-control col-lg-12 me-2" name="campo" type="search"
-                                    placeholder="Search" aria-label="Search">
-                                <button class="btn btn-success" name="enviar" type="submit"> <svg
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-search" viewBox="0 0 16 16">
-                                        <path
-                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                <input class="form-control col-lg-12 me-2" name="campo" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-success" name="enviar" type="submit"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                     </svg></button>
                             </form>
                         </div>
                     </ul>
-                    <a href="carrito.php" class="btn btn-primary">Carrito <span id="num_cart"
-                            class="badge bg-secondary">
+                    <a href="checkout.php" class="btn btn-primary">Carrito <span id="num_cart" class="badge bg-secondary">
                             <?php echo $num_cart; ?>
                         </span>
                     </a>
@@ -77,7 +72,7 @@ if ($productos != null) {
     </header>
     <main>
         <div class="container">
-            
+
             <div class="row">
 
                 <div class="col-6">
@@ -85,101 +80,136 @@ if ($productos != null) {
                     <div id="paypal-button-container"></div>
                 </div>
                 <div class="col-6">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Subtotal</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if ($lista_carrito == null) {
-                                echo '<tr><td colspan="5" class="text-center"><b>Lista vacia</b></td></tr';
-                            } else {
-                                $total = 0;
-                                foreach ($lista_carrito as $producto) {
-                                    $_id = $producto['id'];
-                                    $nombre = $producto['nombre_videojuego'];
-                                    $precio = $producto['precio'];
-                                    $cantidad = $producto['cantidad'];
-                                    $subtotal = $cantidad * $precio;
-                                    $total += $subtotal;
-                                    $dolares= 788.30;
-                                    $dolaresU= round($total/$dolares, 0);
-                                    ?>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if ($lista_carrito == null) {
+                                    echo '<tr><td colspan="5" class="text-center"><b>Lista vacia</b></td></tr';
+                                } else {
+                                    $total = 0;
+                                    foreach ($lista_carrito as $producto) {
+                                        $_id = $producto['id'];
+                                        $nombre = $producto['nombre_videojuego'];
+                                        $precio = $producto['precio'];
+                                        $cantidad = $producto['cantidad'];
+                                        $subtotal = $cantidad * $precio;
+                                        $total += $subtotal;
+                                        $dolares = 788.30;
+                                        $dolaresU = round($total / $dolares, 0);
+                                ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo $nombre ?>
+                                            </td>
+                                            <td>
+                                                <div id="subtotal_<?php echo $_id; ?>" name="subtotal[]"><?php echo MONEDA . number_format($subtotal, 0, '.', ','); ?></div>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+
                                     <tr>
-                                        <td>
-                                            <?php echo $nombre ?>
-                                        </td>
-                                        <td>
-                                            <div id="subtotal_<?php echo $_id; ?>" name="subtotal[]"><?php echo MONEDA . number_format($subtotal, 0, ',', '.'); ?></div>
+                                        <td colspan="2">
+                                            <p class="h3 text-end" id="total">
+                                                <?php echo MONEDA . number_format($total, 2, '.', ','); ?>
+                                            </p>
                                         </td>
                                     </tr>
-                                <?php } ?>
-
-                                <tr>
-                                    <td colspan="3"></td>
-                                    <td colspan="2">
-                                        <p class="h3" id="total">
-                                            <?php echo MONEDA . number_format($total, 0, ',', '.'); ?>
-                                        </p>
-                                    </td>
-                                </tr>
                             </tbody>
                         <?php } ?>
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID; ?>&currency=<?php echo CURRENCY; ?>"> // Replace YOUR_CLIENT_ID with your sandbox client ID
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID; ?>&currency=<?php echo CURRENCY; ?>">
+        // Replace YOUR_CLIENT_ID with your sandbox client ID
     </script>
     <script>
         paypal.Buttons({
-            style:{
-                color:'blue',
-                shape:'pill',
-                label:'pay'
+            style: {
+                color: 'blue',
+                shape: 'pill',
+                label: 'pay'
             },
-            createOrder:function(data, actions){
+            createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
-                        amount:{
+                        amount: {
                             value: <?php echo $dolaresU; ?>
                         }
                     }]
                 });
             },
-            onApprove: function(data, actions){
-                actions.order.capture().then(function (detalles) {
-                    let URL = 'clases/captura.php'
-                    console.log(detalles);
-                    let url = 'clases/captura.php'
 
+            onApprove: function(data, actions) {
+                let URL = 'clases/captura.php';
+
+                return actions.order.capture().then(function(detalles) {
+                    console.log(detalles);
+                    let url = 'clases/captura.php';
                     return fetch(url, {
-                        mothod: 'POST',
+                        method: 'POST',
                         headers: {
                             'content-type': 'application/json'
                         },
                         body: JSON.stringify({
-                            detalles:detalles
+                            detalles: detalles
                         })
-                    })
+                    });
                 });
             },
-            onCancel: function(data){
+            onCancel: function(data) {
                 alert("pago cancelado");
                 console.log(data);
             }
         }).render('#paypal-button-container');
-
     </script>
 
 </body>
+<div class="conce">
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: black;">
+            © 2023 Copyright:
+            <a class="text-white" href="#">Digital Retro</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+</div>
 
 </html>

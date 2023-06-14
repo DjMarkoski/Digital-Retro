@@ -14,6 +14,7 @@ $modulo = $_REQUEST['modulo'] ?? '';
 ?>
 
 <head>
+  <link rel="icon" href="images/logo.jpg">
   <script src="plugins/jquery/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -193,27 +194,27 @@ $modulo = $_REQUEST['modulo'] ?? '';
     <?php
     }
     if (isset($_REQUEST['mensaje1'])) {
-      ?>
-        <div class="alert alert-warning alert-dismissible fade show float-right" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-          </button>
-          <?php echo $_REQUEST['mensaje1'] ?>
-        </div>
-      <?php
-      }
-      if (isset($_REQUEST['mensaje2'])) {
-        ?>
-          <div class="alert alert-danger alert-dismissible fade show float-right" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <?php echo $_REQUEST['mensaje2'] ?>
-          </div>
-        <?php
-        }
+    ?>
+      <div class="alert alert-warning alert-dismissible fade show float-right" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <?php echo $_REQUEST['mensaje1'] ?>
+      </div>
+    <?php
+    }
+    if (isset($_REQUEST['mensaje2'])) {
+    ?>
+      <div class="alert alert-danger alert-dismissible fade show float-right" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <?php echo $_REQUEST['mensaje2'] ?>
+      </div>
+    <?php
+    }
     if ($modulo == "estadisticas" || $modulo == "") {
       include_once "estadisticas.php";
     }

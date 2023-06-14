@@ -12,7 +12,7 @@
         ";
         $res=mysqli_query($con, $query);
         if($res){
-            echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=usuarios&mensaje=Usuario creado exitosamente" />';
+            echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=usuarios&mensaje=Usuario Creado exitosamente" />';
         }
         else{
 ?>

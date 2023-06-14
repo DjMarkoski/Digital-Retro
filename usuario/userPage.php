@@ -1,22 +1,25 @@
-<?php 
-    include_once "../admin/bdecommerce.php";
-    $con = mysqli_connect($host, $user, $pass, $db);
-    $id_cliente = mysqli_real_escape_string($con, $_REQUEST['id_cliente'] ?? '');
-    $query="SELECT id_cliente, nombre, email, usuario, telefono, puntos_fidelidad from cuenta_cliente where id_cliente= '" . $id_cliente . "';";
-    $res = mysqli_query($con, $query);
-    $row = mysqli_fetch_assoc($res);
+<?php
+include_once "../admin/bdecommerce.php";
+$con = mysqli_connect($host, $user, $pass, $db);
+$id_cliente = mysqli_real_escape_string($con, $_REQUEST['id_cliente'] ?? '');
+$query = "SELECT id_cliente, nombre, email, usuario, telefono, puntos_fidelidad from cuenta_cliente where id_cliente= '" . $id_cliente . "';";
+$res = mysqli_query($con, $query);
+$row = mysqli_fetch_assoc($res);
 ?>
 
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
+    <link rel="icon" href="images/logo.jpg">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="userPage.css">
     <title>Userpage</title>
-  </head>
-  <body>
-  <section>
+</head>
+
+<body>
+    <section>
         <div class="form-box">
             <div class="form-value">
                 <form action="" method="POST" class="formulario">
@@ -55,5 +58,6 @@
     </section>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  </body>
+</body>
+
 </html>
